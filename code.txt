@@ -1,0 +1,870 @@
+/*
+* An SFML application using a vector list to store point data - Calum McCallion
+* SFML Documentation https://www.sfml-dev.org/documentation/2.5.1/
+*/
+#include <iostream>                                                     // std namespace
+#include <SFML/Graphics.hpp>                                            // sf namespace 
+#include <string>
+#include "MoveBG.h"
+#include <fstream>
+#include <stdlib.h>
+#include <time.h>
+#include <vector>
+#include <stdlib.h>
+#include <utility> // std::pair
+#include <stdexcept> // std::runtime_error
+#include <sstream> // std::stringstream
+#include <windows.h> //Win32 import to use sleep function
+#include <math.h>
+#include <SFML/Audio.hpp>
+#define _USE_MATH_DEFINES
+#include <cmath>
+
+using namespace std;
+using namespace sf;
+
+
+
+int main() {
+start:
+
+    sf::VideoMode desktopMode = sf::VideoMode::getDesktopMode();
+    sf::RenderWindow Window(sf::VideoMode(desktopMode.width, desktopMode.height, desktopMode.bitsPerPixel), "Outfit Generator", sf::Style::Default);
+
+    sf::View View(Window.getDefaultView());
+    sf::FloatRect fBounds(0.f, 0.f, 2500.f, 3000.f); // arbitrary > view "SIZE"
+
+
+    /*
+    ==========COLOR KEYS==========
+
+    * BLACK = 50
+    * BLUE = 60
+    * GREY = 70
+    * NAVY = 80
+    * YELLOW = 90
+    * GREEN = 100
+    *
+    */
+
+spin:  //onced goto called it shuffles the clothes again
+
+    //=============================================================================BACKGROUND================================================================================================================
+    sf::Texture backgroundPic;
+    if (!backgroundPic.loadFromFile("C:/Users/mccal/Desktop/OutfitGenerator/Pics/misc/bg.jpg"))
+    {
+        std::cerr << "Error while loading texture" << std::endl;
+        return -1;
+    }
+
+    sf::Sprite background;
+    background.setTexture(backgroundPic);
+    sf::FloatRect goSize = background.getGlobalBounds();
+    background.setOrigin(0, 0);
+    background.setScale(1.6f, 1.4f);
+
+
+
+    //=============================================================================JACKETS/HOODIES================================================================================================================
+
+    //========================JACKET1========================
+    sf::Texture jacket1;
+    if (!jacket1.loadFromFile("C:/Users/mccal/Desktop/OutfitGenerator/Pics/Jacket/jacket1.png"))
+    {
+        std::cerr << "Error while loading texture" << std::endl;
+        return -1;
+    }
+
+    sf::Sprite jacket1s;
+    jacket1s.setTexture(jacket1);
+    jacket1s.setPosition(800, 30);
+    jacket1s.setOrigin(0, 0);
+    jacket1s.setScale(.85f, .85f);
+
+    int j1Col = 60; //blue
+
+    
+
+    //========================JACKET2========================
+    sf::Texture jacket2;
+    if (!jacket2.loadFromFile("C:/Users/mccal/Desktop/OutfitGenerator/Pics/Jacket/jacket2.png"))
+    {
+        std::cerr << "Error while loading texture" << std::endl;
+        return -1;
+    }
+
+    sf::Sprite jacket2s;
+    jacket2s.setTexture(jacket2);
+    jacket2s.setPosition(800, 30);
+    jacket2s.setOrigin(0, 0);
+    jacket2s.setScale(.85f, .85f);
+
+    int j2Col = 60; //blue
+
+    //========================JACKET3========================
+    sf::Texture jacket3;
+    if (!jacket3.loadFromFile("C:/Users/mccal/Desktop/OutfitGenerator/Pics/Jacket/jacket3.png"))
+    {
+        std::cerr << "Error while loading texture" << std::endl;
+        return -1;
+    }
+
+    sf::Sprite jacket3s;
+    jacket3s.setTexture(jacket3);
+    jacket3s.setPosition(800, 30);
+    jacket3s.setOrigin(0, 0);
+    jacket3s.setScale(.85f, .85f);
+
+    int j3Col = 50; //black
+
+    //========================JACKET4========================
+    sf::Texture jacket4;
+    if (!jacket4.loadFromFile("C:/Users/mccal/Desktop/OutfitGenerator/Pics/Jacket/jacket4.png"))
+    {
+        std::cerr << "Error while loading texture" << std::endl;
+        return -1;
+    }
+
+    sf::Sprite jacket4s;
+    jacket4s.setTexture(jacket4);
+    jacket4s.setPosition(800, 30);
+    jacket4s.setOrigin(0, 0);
+    jacket4s.setScale(.85f, .85f);
+
+    int j4Col = 50; //black
+
+    //========================JACKET5========================
+    sf::Texture jacket5;
+    if (!jacket5.loadFromFile("C:/Users/mccal/Desktop/OutfitGenerator/Pics/Jacket/jacket5.png"))
+    {
+        std::cerr << "Error while loading texture" << std::endl;
+        return -1;
+    }
+
+    sf::Sprite jacket5s;
+    jacket5s.setTexture(jacket5);
+    jacket5s.setPosition(800, 30);
+    jacket5s.setOrigin(0, 0);
+    jacket5s.setScale(.85f, .85f);
+
+    int j5Col = 70; //grey
+
+    //========================JACKET6========================
+    sf::Texture jacket6;
+    if (!jacket6.loadFromFile("C:/Users/mccal/Desktop/OutfitGenerator/Pics/Jacket/jacket6.png"))
+    {
+        std::cerr << "Error while loading texture" << std::endl;
+        return -1;
+    }
+
+    sf::Sprite jacket6s;
+    jacket6s.setTexture(jacket6);
+    jacket6s.setPosition(800, 30);
+    jacket6s.setOrigin(0, 0);
+    jacket6s.setScale(.85f, .85f);
+
+    int j6Col = 50; //black
+
+    //========================JACKET7========================
+    sf::Texture jacket7;
+    if (!jacket7.loadFromFile("C:/Users/mccal/Desktop/OutfitGenerator/Pics/Jacket/jacket7.png"))
+    {
+        std::cerr << "Error while loading texture" << std::endl;
+        return -1;
+    }
+
+    sf::Sprite jacket7s;
+    jacket7s.setTexture(jacket7);
+    jacket7s.setPosition(800, 30);
+    jacket7s.setOrigin(0, 0);
+    jacket7s.setScale(.85f, .85f);
+
+    int j7Col = 60; //blue
+
+    //========================JACKET8========================
+    sf::Texture jacket8;
+    if (!jacket8.loadFromFile("C:/Users/mccal/Desktop/OutfitGenerator/Pics/Jacket/jacket8.png"))
+    {
+        std::cerr << "Error while loading texture" << std::endl;
+        return -1;
+    }
+
+    sf::Sprite jacket8s;
+    jacket8s.setTexture(jacket8);
+    jacket8s.setPosition(800, 30);
+    jacket8s.setOrigin(0, 0);
+    jacket8s.setScale(.85f, .85f);
+
+    int j8Col = 80; //navy
+
+    //========================JACKET9========================
+    sf::Texture jacket9;
+    if (!jacket9.loadFromFile("C:/Users/mccal/Desktop/OutfitGenerator/Pics/Jacket/jacket9.png"))
+    {
+        std::cerr << "Error while loading texture" << std::endl;
+        return -1;
+    }
+
+    sf::Sprite jacket9s;
+    jacket9s.setTexture(jacket9);
+    jacket9s.setPosition(800, 30);
+    jacket9s.setOrigin(0, 0);
+    jacket9s.setScale(.85f, .85f);
+
+    int j9Col = 80; //navy
+
+    //========================JACKET10========================
+    sf::Texture jacket10;
+    if (!jacket10.loadFromFile("C:/Users/mccal/Desktop/OutfitGenerator/Pics/Jacket/jacket9.png"))
+    {
+        std::cerr << "Error while loading texture" << std::endl;
+        return -1;
+    }
+
+    sf::Sprite jacket10s;
+    jacket10s.setTexture(jacket10);
+    jacket10s.setPosition(800, 30);
+    jacket10s.setOrigin(0, 0);
+    jacket10s.setScale(.85f, .85f);
+
+    int j10Col = 70; //grey
+
+    //=============================================================================TEES================================================================================================================
+    //========================TEE1========================
+    sf::Texture tee1;
+    if (!tee1.loadFromFile("C:/Users/mccal/Desktop/OutfitGenerator/Pics/Tees/tee1.png"))
+    {
+        std::cerr << "Error while loading texture" << std::endl;
+        return -1;
+    }
+
+    sf::Sprite tee1s;
+    tee1s.setTexture(tee1);
+    tee1s.setPosition(1100, 90);
+    //tee1s.setOrigin(0, 0);
+    tee1s.setScale(.6f, .6f);
+
+    //========================TEE2========================
+    sf::Texture tee2;
+    if (!tee2.loadFromFile("C:/Users/mccal/Desktop/OutfitGenerator/Pics/Tees/tee2.png"))
+    {
+        std::cerr << "Error while loading texture" << std::endl;
+        return -1;
+    }
+
+    sf::Sprite tee2s;
+    tee2s.setTexture(tee2);
+    tee2s.setPosition(1100, 90);
+    tee2s.setOrigin(0, 0);
+    tee2s.setScale(.6f, .6f);
+
+    //========================TEE3========================
+    sf::Texture tee3;
+    if (!tee3.loadFromFile("C:/Users/mccal/Desktop/OutfitGenerator/Pics/Tees/tee3.png"))
+    {
+        std::cerr << "Error while loading texture" << std::endl;
+        return -1;
+    }
+
+    sf::Sprite tee3s;
+    tee3s.setTexture(tee3);
+    tee3s.setPosition(1100, 90);
+    tee3s.setOrigin(0, 0);
+    tee3s.setScale(.6f, .6f);
+
+    //========================TEE4========================
+    sf::Texture tee4;
+    if (!tee4.loadFromFile("C:/Users/mccal/Desktop/OutfitGenerator/Pics/Tees/tee4.png"))
+    {
+        std::cerr << "Error while loading texture" << std::endl;
+        return -1;
+    }
+
+    sf::Sprite tee4s;
+    tee4s.setTexture(tee4);
+    tee4s.setPosition(1100, 90);
+    tee4s.setOrigin(0, 0);
+    tee4s.setScale(.6f, .6f);
+
+    //========================TEE5========================
+    sf::Texture tee5;
+    if (!tee5.loadFromFile("C:/Users/mccal/Desktop/OutfitGenerator/Pics/Tees/tee5.png"))
+    {
+        std::cerr << "Error while loading texture" << std::endl;
+        return -1;
+    }
+
+    sf::Sprite tee5s;
+    tee5s.setTexture(tee5);
+    tee5s.setPosition(1100, 90);
+    tee5s.setOrigin(0, 0);
+    tee5s.setScale(.6f, .6f);
+
+    //========================TEE6========================
+    sf::Texture tee6;
+    if (!tee6.loadFromFile("C:/Users/mccal/Desktop/OutfitGenerator/Pics/Tees/tee6.png"))
+    {
+        std::cerr << "Error while loading texture" << std::endl;
+        return -1;
+    }
+
+    sf::Sprite tee6s;
+    tee6s.setTexture(tee6);
+    tee6s.setPosition(1100, 90);
+    tee6s.setOrigin(0, 0);
+    tee6s.setScale(.6f, .6f);
+
+    //========================TEE7========================
+    sf::Texture tee7;
+    if (!tee7.loadFromFile("C:/Users/mccal/Desktop/OutfitGenerator/Pics/Tees/tee7.png"))
+    {
+        std::cerr << "Error while loading texture" << std::endl;
+        return -1;
+    }
+
+    sf::Sprite tee7s;
+    tee7s.setTexture(tee7);
+    tee7s.setPosition(1100, 90);
+    tee7s.setOrigin(0, 0);
+    tee7s.setScale(.6f, .6f);
+
+    //========================TEE8========================
+    sf::Texture tee8;
+    if (!tee8.loadFromFile("C:/Users/mccal/Desktop/OutfitGenerator/Pics/Tees/tee8.png"))
+    {
+        std::cerr << "Error while loading texture" << std::endl;
+        return -1;
+    }
+
+    sf::Sprite tee8s;
+    tee8s.setTexture(tee8);
+    tee8s.setPosition(1100, 90);
+    tee8s.setOrigin(0, 0);
+    tee8s.setScale(.6f, .6f);
+
+
+    //========================TEE9========================
+    sf::Texture tee9;
+    if (!tee9.loadFromFile("C:/Users/mccal/Desktop/OutfitGenerator/Pics/Tees/tee9.png"))
+    {
+        std::cerr << "Error while loading texture" << std::endl;
+        return -1;
+    }
+
+    sf::Sprite tee9s;
+    tee9s.setTexture(tee9);
+    tee9s.setPosition(1100, 90);
+    tee9s.setOrigin(0, 0);
+    tee9s.setScale(.6f, .6f);
+
+    //========================TEE10========================
+    sf::Texture tee10;
+    if (!tee10.loadFromFile("C:/Users/mccal/Desktop/OutfitGenerator/Pics/Tees/tee10.png"))
+    {
+        std::cerr << "Error while loading texture" << std::endl;
+        return -1;
+    }
+
+    sf::Sprite tee10s;
+    tee10s.setTexture(tee10);
+    tee10s.setPosition(1100, 90);
+    tee10s.setOrigin(0, 0);
+    tee10s.setScale(.6f, .6f);
+
+    //========================TEE11========================
+    sf::Texture tee11;
+    if (!tee11.loadFromFile("C:/Users/mccal/Desktop/OutfitGenerator/Pics/Tees/tee11.png"))
+    {
+        std::cerr << "Error while loading texture" << std::endl;
+        return -1;
+    }
+
+    sf::Sprite tee11s;
+    tee11s.setTexture(tee11);
+    tee11s.setPosition(1100, 90);
+    tee11s.setOrigin(0, 0);
+    tee11s.setScale(.6f, .6f);
+
+    //========================TEE12========================
+    sf::Texture tee12;
+    if (!tee12.loadFromFile("C:/Users/mccal/Desktop/OutfitGenerator/Pics/Tees/tee12.png"))
+    {
+        std::cerr << "Error while loading texture" << std::endl;
+        return -1;
+    }
+
+    sf::Sprite tee12s;
+    tee12s.setTexture(tee12);
+    tee12s.setPosition(1100, 90);
+    tee12s.setOrigin(0, 0);
+    tee12s.setScale(.6f, .6f);
+
+    //========================TEE13========================
+    sf::Texture tee13;
+    if (!tee13.loadFromFile("C:/Users/mccal/Desktop/OutfitGenerator/Pics/Tees/tee13.png"))
+    {
+        std::cerr << "Error while loading texture" << std::endl;
+        return -1;
+    }
+
+    sf::Sprite tee13s;
+    tee13s.setTexture(tee13);
+    tee13s.setPosition(1100, 90);
+    tee13s.setOrigin(0, 0);
+    tee13s.setScale(.6f, .6f);
+
+    //========================TEE14========================
+    sf::Texture tee14;
+    if (!tee14.loadFromFile("C:/Users/mccal/Desktop/OutfitGenerator/Pics/Tees/tee14.png"))
+    {
+        std::cerr << "Error while loading texture" << std::endl;
+        return -1;
+    }
+
+    sf::Sprite tee14s;
+    tee14s.setTexture(tee14);
+    tee14s.setPosition(1100, 90);
+    tee14s.setOrigin(0, 0);
+    tee14s.setScale(.6f, .6f);
+
+    //========================TEE15========================
+    sf::Texture tee15;
+    if (!tee15.loadFromFile("C:/Users/mccal/Desktop/OutfitGenerator/Pics/Tees/tee15.png"))
+    {
+        std::cerr << "Error while loading texture" << std::endl;
+        return -1;
+    }
+
+    sf::Sprite tee15s;
+    tee15s.setTexture(tee15);
+    tee15s.setPosition(1100, 90);
+    tee15s.setOrigin(0, 0);
+    tee15s.setScale(.6f, .6f);
+
+    //========================TEE16========================
+    sf::Texture tee16;
+    if (!tee16.loadFromFile("C:/Users/mccal/Desktop/OutfitGenerator/Pics/Tees/tee16.png"))
+    {
+        std::cerr << "Error while loading texture" << std::endl;
+        return -1;
+    }
+
+    sf::Sprite tee16s;
+    tee16s.setTexture(tee16);
+    tee16s.setPosition(1100, 90);
+    tee16s.setOrigin(0, 0);
+    tee16s.setScale(.6f, .6f);
+
+    //========================TEE17========================
+    sf::Texture tee17;
+    if (!tee17.loadFromFile("C:/Users/mccal/Desktop/OutfitGenerator/Pics/Tees/tee17.png"))
+    {
+        std::cerr << "Error while loading texture" << std::endl;
+        return -1;
+    }
+
+    sf::Sprite tee17s;
+    tee17s.setTexture(tee17);
+    tee17s.setPosition(1100, 90);
+    tee17s.setOrigin(0, 0);
+    tee17s.setScale(.6f, .6f);
+
+    //========================TEE18========================
+    sf::Texture tee18;
+    if (!tee18.loadFromFile("C:/Users/mccal/Desktop/OutfitGenerator/Pics/Tees/tee18.png"))
+    {
+        std::cerr << "Error while loading texture" << std::endl;
+        return -1;
+    }
+
+    sf::Sprite tee18s;
+    tee18s.setTexture(tee18);
+    tee18s.setPosition(1100, 90);
+    tee18s.setOrigin(0, 0);
+    tee18s.setScale(.6f, .6f);
+
+
+    //=============================================================================TROUSERS================================================================================================================
+      //========================TROU1========================
+    sf::Texture trou1;
+    if (!trou1.loadFromFile("C:/Users/mccal/Desktop/OutfitGenerator/Pics/Trousers/trousers1.png"))
+    {
+        std::cerr << "Error while loading texture" << std::endl;
+        return -1;
+    }
+
+    sf::Sprite trou1s;
+    trou1s.setTexture(trou1);
+    trou1s.setPosition(800, 400);
+    trou1s.setOrigin(0, 0);
+    trou1s.setScale(.75f, .75f);
+
+    //========================TROU2========================
+    sf::Texture trou2;
+    if (!trou2.loadFromFile("C:/Users/mccal/Desktop/OutfitGenerator/Pics/Trousers/trousers2.png"))
+    {
+        std::cerr << "Error while loading texture" << std::endl;
+        return -1;
+    }
+
+    sf::Sprite trou2s;
+    trou2s.setTexture(trou2);
+    trou2s.setPosition(800, 400);
+    trou2s.setOrigin(0, 0);
+    trou2s.setScale(.75f, .75f);
+
+    //========================TROU3========================
+    sf::Texture trou3;
+    if (!trou3.loadFromFile("C:/Users/mccal/Desktop/OutfitGenerator/Pics/Trousers/trousers3.png"))
+    {
+        std::cerr << "Error while loading texture" << std::endl;
+        return -1;
+    }
+
+    sf::Sprite trou3s;
+    trou3s.setTexture(trou3);
+    trou3s.setPosition(800, 400);
+    trou3s.setOrigin(0, 0);
+    trou3s.setScale(.75f, .75f);
+
+    int tr3Col = 50; //black
+
+    //========================TROU4========================
+    sf::Texture trou4;
+    if (!trou4.loadFromFile("C:/Users/mccal/Desktop/OutfitGenerator/Pics/Trousers/trousers4.png"))
+    {
+        std::cerr << "Error while loading texture" << std::endl;
+        return -1;
+    }
+
+    sf::Sprite trou4s;
+    trou4s.setTexture(trou4);
+    trou4s.setPosition(800, 400);
+    trou4s.setOrigin(0, 0);
+    trou4s.setScale(.75f, .75f);
+
+    int tr4Col = 70; //grey
+
+    //========================TROU5========================
+    sf::Texture trou5;
+    if (!trou5.loadFromFile("C:/Users/mccal/Desktop/OutfitGenerator/Pics/Trousers/trousers5.png"))
+    {
+        std::cerr << "Error while loading texture" << std::endl;
+        return -1;
+    }
+
+    sf::Sprite trou5s;
+    trou5s.setTexture(trou5);
+    trou5s.setPosition(800, 400);
+    trou5s.setOrigin(0, 0);
+    trou5s.setScale(.75f, .75f);
+
+    int tr5Col = 80; //navy
+
+    //========================TROU6========================
+    sf::Texture trou6;
+    if (!trou6.loadFromFile("C:/Users/mccal/Desktop/OutfitGenerator/Pics/Trousers/trousers6.png"))
+    {
+        std::cerr << "Error while loading texture" << std::endl;
+        return -1;
+    }
+
+    sf::Sprite trou6s;
+    trou6s.setTexture(trou6);
+    trou6s.setPosition(800, 400);
+    trou6s.setOrigin(0, 0);
+    trou6s.setScale(.75f, .75f);
+
+    int tr6Col = 80; //navy
+
+    //========================TROU7========================
+    sf::Texture trou7;
+    if (!trou7.loadFromFile("C:/Users/mccal/Desktop/OutfitGenerator/Pics/Trousers/trousers7.png"))
+    {
+        std::cerr << "Error while loading texture" << std::endl;
+        return -1;
+    }
+
+    sf::Sprite trou7s;
+    trou7s.setTexture(trou7);
+    trou7s.setPosition(800, 400);
+    trou7s.setOrigin(0, 0);
+    trou7s.setScale(.75f, .75f);
+
+    int tr7Col = 50; //black
+
+
+
+    //=============================================================================SHOES================================================================================================================
+   //========================SHOE1========================
+    sf::Texture shoe1;
+    if (!shoe1.loadFromFile("C:/Users/mccal/Desktop/OutfitGenerator/Pics/Shoes/shoe1.png"))
+    {
+        std::cerr << "Error while loading texture" << std::endl;
+        return -1;
+    }
+
+    sf::Sprite shoe1s;
+    shoe1s.setTexture(shoe1);
+    shoe1s.setPosition(750, 600);
+    shoe1s.setOrigin(0, 0);
+    shoe1s.setScale(1.0f, 1.0f);
+
+    //========================SHOE2========================
+    sf::Texture shoe2;
+    if (!shoe2.loadFromFile("C:/Users/mccal/Desktop/OutfitGenerator/Pics/Shoes/shoe2.png"))
+    {
+        std::cerr << "Error while loading texture" << std::endl;
+        return -1;
+    }
+
+    sf::Sprite shoe2s;
+    shoe2s.setTexture(shoe2);
+    shoe2s.setPosition(750, 600);
+    shoe2s.setOrigin(0, 0);
+    shoe2s.setScale(1.0f, 1.0f);
+
+    //========================SHOE3========================
+    sf::Texture shoe3;
+    if (!shoe3.loadFromFile("C:/Users/mccal/Desktop/OutfitGenerator/Pics/Shoes/shoe3.png"))
+    {
+        std::cerr << "Error while loading texture" << std::endl;
+        return -1;
+    }
+
+    sf::Sprite shoe3s;
+    shoe3s.setTexture(shoe3);
+    shoe3s.setPosition(750, 600);
+    shoe3s.setOrigin(0, 0);
+    shoe3s.setScale(1.0f, 1.0f);
+
+    //========================SHOE4========================
+    sf::Texture shoe4;
+    if (!shoe4.loadFromFile("C:/Users/mccal/Desktop/OutfitGenerator/Pics/Shoes/shoe4.png"))
+    {
+        std::cerr << "Error while loading texture" << std::endl;
+        return -1;
+    }
+
+    sf::Sprite shoe4s;
+    shoe4s.setTexture(shoe4);
+    shoe4s.setPosition(750, 600);
+    shoe4s.setOrigin(0, 0);
+    shoe4s.setScale(1.0f, 1.0f);
+
+    //========================SHOE5========================
+    sf::Texture shoe5;
+    if (!shoe5.loadFromFile("C:/Users/mccal/Desktop/OutfitGenerator/Pics/Shoes/shoe5.png"))
+    {
+        std::cerr << "Error while loading texture" << std::endl;
+        return -1;
+    }
+
+    sf::Sprite shoe5s;
+    shoe5s.setTexture(shoe5);
+    shoe5s.setPosition(750, 600);
+    shoe5s.setOrigin(0, 0);
+    shoe5s.setScale(1.0f, 1.0f);
+
+    int s5Col = 50; //black
+
+    //========================SHOE6========================
+    sf::Texture shoe6;
+    if (!shoe6.loadFromFile("C:/Users/mccal/Desktop/OutfitGenerator/Pics/Shoes/shoe6.png"))
+    {
+        std::cerr << "Error while loading texture" << std::endl;
+        return -1;
+    }
+
+    sf::Sprite shoe6s;
+    shoe6s.setTexture(shoe6);
+    shoe6s.setPosition(750, 600);
+    shoe6s.setOrigin(0, 0);
+    shoe6s.setScale(1.0f, 1.0f);
+
+    //=============================================================================RANDOM GENERATOR CODE================================================================================================================
+
+    //Random Number Code
+    srand(time(NULL));
+    int jacketRand;
+    int teeRand;
+    int trouRand;
+    int shoeRand;
+
+    jacketRand = rand() % 10 + 1;
+    teeRand = rand() % 18 + 1;
+    trouRand = rand() % 7 + 1;
+    shoeRand = rand() % 6 + 1;
+
+    int jackNum = jacketRand;
+    int teeNum = teeRand;
+    int trouNum = trouRand;
+    int shoeNum = shoeRand;
+
+    cout << "jack" << jackNum;
+    cout << "tee " << teeNum;
+    cout << "trou " << trouNum;
+
+    int flag = 0;
+
+  
+
+    //=============================================================================THE BRAIN================================================================================================================
+    sf::Clock timer;
+
+    
+    while (Window.isOpen() && flag==0)
+    {
+        // Process events
+        sf::Event event;
+        while (Window.pollEvent(event))
+        {
+            // Close the window if a key is pressed or if requested
+            if (event.type == sf::Event::Closed) Window.close();
+
+        }
+
+        if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+            goto spin;
+        }
+
+        Window.draw(background);
+
+        //JACKET IF STATEMENTS
+        if (jackNum == 1) {
+            Window.draw(jacket1s);
+        }
+        else if (jackNum == 2) {
+            Window.draw(jacket2s);
+        }
+        else if (jackNum == 3) {
+            Window.draw(jacket3s);
+        }
+        else if (jackNum == 4) {
+            Window.draw(jacket4s);
+        }
+        else if (jackNum == 5) {
+            Window.draw(jacket5s);
+        }
+        else if (jackNum == 6) {
+            Window.draw(jacket6s);
+        }
+        else if (jackNum == 7) {
+            Window.draw(jacket7s);
+        }
+        else if (jackNum == 8) {
+            Window.draw(jacket8s);
+        }
+        else if (jackNum == 9) {
+            Window.draw(jacket9s);
+        }
+        else if (jackNum == 10) {
+            Window.draw(jacket10s);
+        }
+
+        //TEE IF STATEMENTS
+        if (teeNum == 1) {
+            Window.draw(tee1s);
+        }
+        else if (teeNum == 2) {
+            Window.draw(tee2s);
+        }
+        else if (teeNum == 3) {
+            Window.draw(tee3s);
+        }
+        else if (teeNum == 4) {
+            Window.draw(tee4s);
+        }
+        else if (teeNum == 5) {
+            Window.draw(tee5s);
+        }
+        else if (teeNum == 6) {
+            Window.draw(tee6s);
+        }
+        else if (teeNum == 7) {
+            Window.draw(tee7s);
+        }
+        else if (teeNum == 8) {
+            Window.draw(tee8s);
+        }
+        else if (teeNum == 9) {
+            Window.draw(tee9s);
+        }
+        else if (teeNum == 10) {
+            Window.draw(tee10s);
+        }
+        else if (teeNum == 11) {
+            Window.draw(tee11s);
+        }
+        else if (teeNum == 12) {
+            Window.draw(tee12s);
+        }
+        else if (teeNum == 13) {
+            Window.draw(tee13s);
+        }
+        else if (teeNum == 14) {
+            Window.draw(tee14s);
+        }
+        else if (teeNum == 15) {
+            Window.draw(tee15s);
+        }
+        else if (teeNum == 16) {
+            Window.draw(tee16s);
+        }
+        else if (teeNum == 17) {
+            Window.draw(tee17s);
+        }
+        else if (teeNum == 18) {
+            Window.draw(tee18s);
+        }
+        
+
+        //TROUSERS IF STATEMENTS
+        if (trouNum == 1) {
+            Window.draw(trou1s);
+        }
+        else if (trouNum == 2) {
+            Window.draw(trou2s);
+        }
+        else if (trouNum == 3) {
+            Window.draw(trou3s);
+        }
+        else if (trouNum == 4) {
+            Window.draw(trou4s);
+        }
+        else if (trouNum == 5) {
+            Window.draw(trou5s);
+        }
+        else if (trouNum == 6) {
+            Window.draw(trou6s);
+        }
+        else if (trouNum == 7) {
+            Window.draw(trou7s);
+        }
+
+        //SHOES IF STATEMENTS
+        if (shoeNum == 1) {
+            Window.draw(shoe1s);
+        }
+        else if (shoeNum == 2) {
+            Window.draw(shoe2s);
+        }
+        else if (shoeNum == 3) {
+            Window.draw(shoe3s);
+        }
+        else if (shoeNum == 4) {
+            Window.draw(shoe4s);
+        }
+        else if (shoeNum == 5) {
+            Window.draw(shoe5s);
+        }
+        else if (shoeNum == 6) {
+            Window.draw(shoe6s);
+        }
+
+        // Update display and wait for vsync
+        Window.display();
+
+    }
+
+}
