@@ -28,7 +28,7 @@ This application demonstrates the usage of SFML library to create a graphical ap
 
 ### Installation
 
-1. Clone the repository: `git clone https://github.com/your-repo.git`
+1. Clone the repository: `https://github.com/CalumMcCallion/OutfitGenerator.git`
 2. Build the application using the provided makefile or your preferred build system.
 3. Run the executable to launch the application.
 
